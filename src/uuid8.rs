@@ -1,7 +1,7 @@
 use rand::Rng;
 use uuid::Uuid;
 
-fn generate_uuid8() -> Uuid {
+fn generate_uuid_v8() -> Uuid {
     let mut rng = rand::thread_rng();
     let mut bytes = [0u8; 16];
 
@@ -16,6 +16,6 @@ fn generate_uuid8() -> Uuid {
 }
 
 pub fn generate() -> Uuid {
-    let uuid8 = generate_uuid8();
+    let uuid8 = generate_uuid_v8();
     return uuid8
 }
