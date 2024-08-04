@@ -13,7 +13,7 @@ fn generate_uuid_v6() -> Uuid {
     let timestamp = (timestamp_ms & 0xFFFFFFFFFFFFF) << 4;
 
     let mut rng = rand::thread_rng();
-    let random_bits: u64 = rng.gen();
+    let random_bits: u64 = rng.random();
     let random_62_bits = random_bits & 0x3FFFFFFFFFFFFFFF;
 
     let version: u16 = 6 << 12;
@@ -22,7 +22,7 @@ fn generate_uuid_v6() -> Uuid {
     let time_low = (timestamp & 0xFFFFFFFF) as u32;
 
     let clock_seq = ((random_62_bits >> 48) & 0x3FFF) as u16;
-    let node = (random_62_bits & 0xFFFFFFFFFFFF) as u64;
+    let node = random_62_bits & 0xFFFFFFFFFFFF;
 
     let mut d4 = [0u8; 8];
     d4[0] = (clock_seq >> 8) as u8;
@@ -33,7 +33,7 @@ fn generate_uuid_v6() -> Uuid {
     uuid
 }
 
-pub fn uuid6() -> Uuid {
+pub fn generate() -> Uuid {
     let uuid6 = generate_uuid_v6();
     return uuid6
 }
