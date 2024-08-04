@@ -20,7 +20,7 @@ fn generate_uuid_v3(namespace: Uuid, name: &str) -> Uuid {
     Uuid::from_bytes(bytes)
 }
 
-pub fn uuid3(namespace: Uuid, name: &str) -> Uuid {
+pub fn generate(namespace: Uuid, name: &str) -> Uuid {
     let uuid3 = generate_uuid_v3(namespace, name);
     return uuid3
 }

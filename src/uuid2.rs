@@ -42,7 +42,7 @@ fn generate_uuid_v2() -> Uuid {
     Uuid::from_bytes(uuid_bytes)
 }
 
-pub fn uuid2() -> Uuid {
+pub fn generate() -> Uuid {
     let uuid2 = generate_uuid_v2();
     return uuid2
 }

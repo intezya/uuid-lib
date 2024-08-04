@@ -1,8 +1,8 @@
+extern crate chrono;
 extern crate rand;
 extern crate uuid;
 
 use std::time::{SystemTime, UNIX_EPOCH};
-use chrono::prelude::*;
 use rand::Rng;
 use uuid::Uuid;
 

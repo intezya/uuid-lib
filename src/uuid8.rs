@@ -15,7 +15,7 @@ fn generate_uuid8() -> Uuid {
     return uuid.hyphenated().into_uuid()
 }
 
-pub fn uuid8() -> Uuid {
+pub fn generate() -> Uuid {
     let uuid8 = generate_uuid8();
     return uuid8
 }
