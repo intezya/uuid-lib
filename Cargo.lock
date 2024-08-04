@@ -160,6 +160,7 @@ name = "python-uuids"
 version = "0.1.0"
 dependencies = [
  "chrono",
+ "libc",
  "rand",
  "uuid",
 ]
