@@ -307,19 +307,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "python-uuids"
-version = "0.1.0"
-dependencies = [
- "chrono",
- "libc",
- "md5",
- "pyo3",
- "rand",
- "sha1",
- "uuid",
-]
-
-[[package]]
 name = "quote"
 version = "1.0.36"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -421,6 +408,19 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "81dfa00651efa65069b0b6b651f4aaa31ba9e3c3ce0137aaad053604ee7e0314"
 dependencies = [
  "getrandom",
+]
+
+[[package]]
+name = "uuid-lib"
+version = "0.1.0"
+dependencies = [
+ "chrono",
+ "libc",
+ "md5",
+ "pyo3",
+ "rand",
+ "sha1",
+ "uuid",
 ]
 
 [[package]]
