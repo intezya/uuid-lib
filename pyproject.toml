@@ -4,6 +4,9 @@ build-backend = "maturin"
 
 [project]
 name = "uuid_lib"
+description = "Python bindings for the UUID library"
+authors = [{ name = "intezya", email = "intezya@gmail.com"}]
+keywords = ["uuid", "uuid_lib", "uuid1", "uuid2", "uuid3", "uuid4", "uuid5", "uuid6", "uuid7", "uuid8"]
 requires-python = ">=3.8"
 classifiers = [
     "Programming Language :: Rust",
