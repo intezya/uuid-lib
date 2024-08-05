@@ -1,4 +1,6 @@
 use pyo3::prelude::*;
+use uuid::Uuid;
+
 
 mod _uuid1;
 mod _uuid2;
@@ -19,6 +21,25 @@ fn uuid1() -> PyResult<String> {
 fn uuid2() -> PyResult<String> {
     let uuid2 = _uuid2::generate();
     Ok(uuid2.to_string())
+}
+
+#[pyfunction]
+fn uuid3(namespace: Uuid, name: &str) -> PyResult<String> {
+    let uuid3 = _uuid3::generate(namespace, name);
+    Ok(uuid3.to_string())
+}
+
+#[pyfunction]
+fn uuid4() -> PyResult<String> {
+    let uuid4 = Uuid::new_v4();
+    println!("{}", uuid4);
+    Ok(uuid4.to_string())
+}
+
+#[pyfunction]
+fn uuid5(namespace: Uuid, name: &str) -> PyResult<String> {
+    let uuid5 = _uuid5::generate(namespace, name);
+    Ok(uuid5.to_string())
 }
 
 #[pyfunction]
@@ -45,6 +66,7 @@ fn uuid8() -> PyResult<String> {
 fn _uuid_lib(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(uuid1, m)?)?;
     m.add_function(wrap_pyfunction!(uuid2, m)?)?;
+    m.add_function(wrap_pyfunction!(uuid4, m)?)?;
     m.add_function(wrap_pyfunction!(uuid6, m)?)?;
     m.add_function(wrap_pyfunction!(uuid7, m)?)?;
     m.add_function(wrap_pyfunction!(uuid8, m)?)?;
