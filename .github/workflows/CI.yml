@@ -160,14 +160,16 @@ jobs:
     needs: [linux, musllinux, windows, macos, sdist]
     steps:
       - name: Creating .pypirc
+        env:
+          token: ${{ secrets.PYPI_API_TOKEN }}
         run: |
-          echo -e "[pypi]\n  username=__token__\n  password=${{ secrets.PYPI_API_TOKEN }}" > $HOME/.pypirc
+          echo -e "[pypi]\n  username=__token__\n  password=$token" > $HOME/.pypirc
       - uses: actions/download-artifact@v4
       - name: Publish to PyPI
         uses: PyO3/maturin-action@v1
         env:
-          MATURIN_PYPI_USERNAME: __token__
-          MATURIN_PYPI_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+          MATURIN_USERNAME: __token__
+          MATURIN_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
         with:
           command: upload
           args: --non-interactive --skip-existing wheels-*/*
