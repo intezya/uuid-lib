@@ -93,9 +93,6 @@ fn uuid8(bytes: &Bound<'_, PyBytes>) -> PyResult<UUID> {
 }
 
 
-
-
-
 #[pymodule]
 fn _uuid_lib(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<UUID>()?;
