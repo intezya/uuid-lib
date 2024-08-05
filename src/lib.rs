@@ -7,6 +7,21 @@ use mac_address::get_mac_address;
 mod _uuid2;
 
 
+#[pyclass(subclass, module="uuid_lib")]
+pub struct UUID {
+    uuid: Uuid
+}
+
+
+#[pymethods]
+impl UUID {
+    fn __str__(&self) -> String {
+        return self.uuid.hyphenated().to_string();
+    }
+
+}
+
+
 
 fn get_node_id() -> [u8; 6] {
     let bytes = match get_mac_address() {
@@ -22,59 +37,59 @@ fn get_node_id() -> [u8; 6] {
 }
 
 #[pyfunction]
-fn uuid1() -> PyResult<String> {
+fn uuid1() -> PyResult<UUID> {
     let uuid = Uuid::new_v1(
         Timestamp::from_unix(&Context::new_random(), 0, 0), &get_node_id()
     );
-    Ok(uuid.to_string())
+    Ok(UUID {uuid })
 }
 
 #[pyfunction]
-fn uuid2() -> PyResult<String> {
+fn uuid2() -> PyResult<UUID> {
     let uuid = _uuid2::generate();
-    Ok(uuid.to_string())
+    Ok(UUID {uuid })
 }
 
 #[pyfunction]
-fn uuid3() -> PyResult<String> {
+fn uuid3() -> PyResult<UUID> {
     let uuid = Uuid::new_v3(
         &Uuid::new_v4(), &get_node_id()
     );
-    Ok(uuid.to_string())
+    Ok(UUID {uuid })
 }
 
 #[pyfunction]
-fn uuid4() -> PyResult<String> {
+fn uuid4() -> PyResult<UUID> {
     let uuid = Uuid::new_v4();
-    Ok(uuid.to_string())
+    Ok(UUID {uuid })
 }
 
 #[pyfunction]
-fn uuid5() -> PyResult<String> {
+fn uuid5() -> PyResult<UUID> {
     let uuid = Uuid::new_v5(
         &Uuid::new_v4(), &get_node_id()
     );
-    Ok(uuid.to_string())
+    Ok(UUID {uuid })
 }
 
 #[pyfunction]
-fn uuid6() -> PyResult<String> {
+fn uuid6() -> PyResult<UUID> {
     let uuid = Uuid::now_v6(
         &get_node_id()
     );
-    Ok(uuid.to_string())
+    Ok(UUID {uuid })
 
 }#[pyfunction]
-fn uuid7() -> PyResult<String> {
+fn uuid7() -> PyResult<UUID> {
     let uuid = Uuid::now_v7();
-    Ok(uuid.to_string())
+    Ok(UUID {uuid })
 
 }#[pyfunction]
-fn uuid8(bytes: &Bound<'_, PyBytes>) -> PyResult<String> {
+fn uuid8(bytes: &Bound<'_, PyBytes>) -> PyResult<UUID> {
     let uuid = Uuid::new_v8(
         bytes.extract()?
     );
-    Ok(uuid.to_string())
+    Ok(UUID {uuid })
 }
 
 
@@ -83,6 +98,7 @@ fn uuid8(bytes: &Bound<'_, PyBytes>) -> PyResult<String> {
 
 #[pymodule]
 fn _uuid_lib(m: &Bound<'_, PyModule>) -> PyResult<()> {
+    m.add_class::<UUID>()?;
     m.add_function(wrap_pyfunction!(uuid1, m)?)?;
     m.add_function(wrap_pyfunction!(uuid2, m)?)?;
     m.add_function(wrap_pyfunction!(uuid3, m)?)?;
