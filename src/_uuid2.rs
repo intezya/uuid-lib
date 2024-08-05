@@ -6,7 +6,7 @@ extern crate libc;
 use chrono::prelude::*;
 use rand::Rng;
 use uuid::Uuid;
-use libc::getuid;
+use libc::getpid;
 
 fn generate_uuid_v2() -> Uuid {
     let utc_now = Utc::now().timestamp_nanos_opt().unwrap() as u64;
@@ -16,7 +16,7 @@ fn generate_uuid_v2() -> Uuid {
     let time_hi = ((utc_now >> 48) & 0x0FFF) as u16;
     let time_hi_and_version = (2 << 12) | time_hi;
 
-    let user_id = unsafe { getuid() } as u16;
+    let user_id = unsafe { getpid() } as u16;
 
     let clock_seq_hi_and_res = ((user_id >> 8) & 0x3F) | 0x80;
     let clock_seq_low = (user_id & 0xFF) as u8;
