@@ -24,22 +24,10 @@ fn uuid2() -> PyResult<String> {
 }
 
 #[pyfunction]
-fn uuid3(namespace: Uuid, name: &str) -> PyResult<String> {
-    let uuid3 = _uuid3::generate(namespace, name);
-    Ok(uuid3.to_string())
-}
-
-#[pyfunction]
 fn uuid4() -> PyResult<String> {
     let uuid4 = Uuid::new_v4();
     println!("{}", uuid4);
     Ok(uuid4.to_string())
-}
-
-#[pyfunction]
-fn uuid5(namespace: Uuid, name: &str) -> PyResult<String> {
-    let uuid5 = _uuid5::generate(namespace, name);
-    Ok(uuid5.to_string())
 }
 
 #[pyfunction]
