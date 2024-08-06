@@ -19,6 +19,11 @@ impl UUID {
         return self.uuid.hyphenated().to_string();
     }
 
+    #[getter]
+    fn bytes(&self) -> &[u8] {
+        self.uuid.as_bytes()
+    }
+
 }
 
 
@@ -44,7 +49,7 @@ fn uuid1() -> PyResult<UUID> {
     Ok(UUID {uuid })
 }
 
-#[pyfunction]
+#[pyfunction]  // TODO: need to fix getting timestamp (need to get in irl)
 fn uuid2() -> PyResult<UUID> {
     let uuid = _uuid2::generate();
     Ok(UUID {uuid })
