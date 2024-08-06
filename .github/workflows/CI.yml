@@ -10,10 +10,11 @@ on:
     branches:
       - main
       - master
-      - dev
     tags:
       - '*'
   pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
