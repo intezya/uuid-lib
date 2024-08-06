@@ -44,21 +44,25 @@ fn get_node_id() -> [u8; 6] {
 #[pyfunction]
 fn uuid1() -> PyResult<UUID> {
     let uuid = Uuid::new_v1(
-        Timestamp::from_unix(&Context::new_random(), 0, 0), &get_node_id()
+        Timestamp::from_unix(
+            &Context::new_random(), 0, 0
+        ),
+        &get_node_id(),
     );
     Ok(UUID {uuid })
 }
 
-#[pyfunction]  // TODO: need to fix getting timestamp (need to get in irl)
+#[pyfunction]
 fn uuid2() -> PyResult<UUID> {
-    let uuid = _uuid2::generate();
+    let uuid = _uuid2::now_v2();
     Ok(UUID {uuid })
 }
 
 #[pyfunction]
 fn uuid3() -> PyResult<UUID> {
     let uuid = Uuid::new_v3(
-        &Uuid::new_v4(), &get_node_id()
+        &Uuid::new_v4(),
+        &get_node_id(),
     );
     Ok(UUID {uuid })
 }
@@ -72,7 +76,8 @@ fn uuid4() -> PyResult<UUID> {
 #[pyfunction]
 fn uuid5() -> PyResult<UUID> {
     let uuid = Uuid::new_v5(
-        &Uuid::new_v4(), &get_node_id()
+        &Uuid::new_v4(),
+        &get_node_id(),
     );
     Ok(UUID {uuid })
 }
@@ -83,8 +88,9 @@ fn uuid6() -> PyResult<UUID> {
         &get_node_id()
     );
     Ok(UUID {uuid })
+}
 
-}#[pyfunction]
+#[pyfunction]
 fn uuid7() -> PyResult<UUID> {
     let uuid = Uuid::now_v7();
     Ok(UUID {uuid })
