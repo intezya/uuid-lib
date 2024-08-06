@@ -3,10 +3,11 @@ extern crate rand;
 extern crate uuid;
 extern crate libc;
 
-use chrono::prelude::*;
-use rand::Rng;
-use uuid::Uuid;
+use chrono::Utc;
+use uuid::{Uuid};
 use libc::getpid;
+use rand::Rng;
+
 
 fn generate_uuid_v2() -> Uuid {
     let utc_now = Utc::now().timestamp_nanos_opt().unwrap() as u64;
@@ -42,7 +43,8 @@ fn generate_uuid_v2() -> Uuid {
     Uuid::from_bytes(uuid_bytes)
 }
 
-pub fn generate() -> Uuid {
+
+pub fn now_v2() -> Uuid {
     let uuid2 = generate_uuid_v2();
     return uuid2
 }
