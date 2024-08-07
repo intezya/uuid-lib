@@ -19,6 +19,10 @@ impl UUID {
         return self.uuid.hyphenated().to_string();
     }
 
+    fn __repr__(&self) -> String {
+        return format!("UUID('{}')", self.uuid)
+    }
+
     #[getter]
     fn bytes(&self) -> &[u8] {
         self.uuid.as_bytes()
