@@ -3,33 +3,10 @@ use pyo3::prelude::*;
 use rand::RngCore;
 use uuid::{Context, Timestamp, Uuid};
 use mac_address::get_mac_address;
+use uuid_struct::UUID;
 
 mod _uuid2;
-
-
-#[pyclass(subclass, module="uuid_lib")]
-pub struct UUID {
-    uuid: Uuid
-}
-
-
-#[pymethods]
-impl UUID {
-    fn __str__(&self) -> String {
-        return self.uuid.hyphenated().to_string();
-    }
-
-    fn __repr__(&self) -> String {
-        return format!("UUID(\"{}\")", self.uuid)
-    }
-
-    #[getter]
-    fn bytes(&self) -> &[u8] {
-        self.uuid.as_bytes()
-    }
-
-}
-
+mod uuid_struct;
 
 
 fn get_node_id() -> [u8; 6] {
