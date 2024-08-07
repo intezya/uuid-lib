@@ -20,7 +20,7 @@ impl UUID {
     }
 
     fn __repr__(&self) -> String {
-        return format!("UUID('{}')", self.uuid)
+        return format!("UUID(\"{}\")", self.uuid)
     }
 
     #[getter]
