@@ -15,7 +15,7 @@ pub struct UUID {
 #[pymethods]
 impl UUID {
     #[new]
-    fn new(
+    fn init(
         bytes: &Bound<'_, PyBytes>,
     ) -> PyResult<Self> {
 

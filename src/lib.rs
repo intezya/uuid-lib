@@ -76,6 +76,7 @@ fn uuid7() -> PyResult<UUID> {
     let uuid = Uuid::now_v7();
     Ok(UUID {uuid })
 }
+
 #[pyfunction]
 fn uuid8(bytes: &Bound<'_, PyBytes>) -> PyResult<UUID> {
     let uuid = Uuid::new_v8(
