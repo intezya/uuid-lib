@@ -1,4 +1,6 @@
-use pyo3::{prelude::PyAnyMethods, pyclass, pymethods, types::PyBytes, Bound, PyResult};
+use pyo3::{
+    exceptions::PyValueError, prelude::PyAnyMethods, pyclass, pymethods, types::PyBytes, Bound, PyResult,
+};
 use uuid::{Bytes, Uuid};
 
 
@@ -33,6 +35,16 @@ impl UUID {
     #[getter]
     fn bytes(&self) -> &[u8] {
         self.uuid.as_bytes()
+    }
+
+    fn to_timestamp(&self) -> PyResult<u64> {
+        match self.uuid.get_timestamp() {
+            Some(ts) => {
+                let (seconds, subsec_nanos) = ts.to_unix();
+                Ok(seconds * 1000 + subsec_nanos as u64 / 1_000_000)
+            }
+            _ => Err(PyValueError::new_err("Timestamp not available for this uuid version!"))
+        }
     }
 
     #[staticmethod]
