@@ -1,6 +1,5 @@
 from typing import TypeAlias
 
-
 Bytes: TypeAlias = bytes
 
 
@@ -70,6 +69,18 @@ class UUID:
         """
         ...
 
+    def to_timestamp(self) -> int:
+        """
+        Converts the object to a Unix timestamp.
+
+        Works only with uuid1, uuid6, uuid7.
+        Raises ValueError when used for unsupported uuids.
+
+        Returns:
+            int: The number of seconds that have elapsed since January 1, 1970, at 00:00:00 UTC.
+        """
+        ...
+
 
 def uuid1() -> UUID:
     """
@@ -83,6 +94,7 @@ def uuid1() -> UUID:
     """
     ...
 
+
 def uuid2() -> UUID:
     """
     Generate a UUID based on a DCE Security version and the current time.
@@ -94,6 +106,7 @@ def uuid2() -> UUID:
         UUID: A UUID object representing a Version 2 UUID.
     """
     ...
+
 
 def uuid3() -> UUID:
     """
@@ -107,6 +120,7 @@ def uuid3() -> UUID:
     """
     ...
 
+
 def uuid4() -> UUID:
     """
     Generate a random UUID.
@@ -117,6 +131,7 @@ def uuid4() -> UUID:
         UUID: A UUID object representing a Version 4 UUID.
     """
     ...
+
 
 def uuid5() -> UUID:
     """
@@ -130,6 +145,7 @@ def uuid5() -> UUID:
     """
     ...
 
+
 def uuid6() -> UUID:
     """
     Generate a UUID based on the time and clock sequence, reordered for improved database indexing.
@@ -142,6 +158,7 @@ def uuid6() -> UUID:
     """
     ...
 
+
 def uuid7() -> UUID:
     """
     Generate a UUID based on the Unix timestamp.
@@ -153,6 +170,7 @@ def uuid7() -> UUID:
         UUID: A UUID object representing a Version 7 UUID.
     """
     ...
+
 
 def uuid8(bytes: Bytes) -> UUID:
     """
