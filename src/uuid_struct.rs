@@ -23,11 +23,11 @@ impl UUID {
 
 
     fn __str__(&self) -> String {
-        return self.uuid.hyphenated().to_string();
+        self.uuid.hyphenated().to_string()
     }
 
     fn __repr__(&self) -> String {
-        return format!("UUID object:  UUID(\"{}\")", self.uuid);
+        format!("UUID object:  UUID(\"{}\")", self.uuid)
     }
 
     #[getter]
