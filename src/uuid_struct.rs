@@ -1,14 +1,11 @@
-use pyo3::{Bound, pyclass, pymethods, PyResult};
-use pyo3::prelude::PyAnyMethods;
-use pyo3::types::PyBytes;
-use uuid::Uuid;
-use uuid::Bytes;
+use pyo3::{prelude::PyAnyMethods, pyclass, pymethods, types::PyBytes, Bound, PyResult};
+use uuid::{Bytes, Uuid};
 
 
-#[pyclass(subclass, module="uuid_lib")]
+#[pyclass(subclass, module = "uuid_lib")]
 #[derive(Clone)]
 pub struct UUID {
-    pub uuid: Uuid
+    pub uuid: Uuid,
 }
 
 
@@ -18,7 +15,6 @@ impl UUID {
     fn init(
         bytes: &Bound<'_, PyBytes>,
     ) -> PyResult<Self> {
-
         let uuid = match bytes {
             bytes => Self::new_from_bytes(bytes),
         }?;
@@ -31,7 +27,7 @@ impl UUID {
     }
 
     fn __repr__(&self) -> String {
-        return format!("UUID object:  UUID(\"{}\")", self.uuid)
+        return format!("UUID object:  UUID(\"{}\")", self.uuid);
     }
 
     #[getter]
