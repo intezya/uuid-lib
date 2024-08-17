@@ -26,10 +26,7 @@ fn get_node_id() -> [u8; 6] {
 
 #[pyfunction]
 fn uuid1() -> PyResult<UUID> {
-    let uuid = Uuid::new_v1(
-        Timestamp::from_unix(
-            &Context::new_random(), 0, 0,
-        ),
+    let uuid = Uuid::now_v1(
         &get_node_id(),
     );
     Ok(UUID { uuid })
