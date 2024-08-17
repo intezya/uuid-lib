@@ -1,8 +1,10 @@
+use mac_address::get_mac_address;
+use pyo3::prelude::{
+    pyfunction, pymodule, wrap_pyfunction, Bound, PyAnyMethods, PyModule, PyModuleMethods, PyResult,
+};
 use pyo3::types::PyBytes;
-use pyo3::prelude::*;
 use rand::RngCore;
 use uuid::{Context, Timestamp, Uuid};
-use mac_address::get_mac_address;
 use uuid_struct::UUID;
 
 mod _uuid2;
@@ -24,19 +26,16 @@ fn get_node_id() -> [u8; 6] {
 
 #[pyfunction]
 fn uuid1() -> PyResult<UUID> {
-    let uuid = Uuid::new_v1(
-        Timestamp::from_unix(
-            &Context::new_random(), 0, 0
-        ),
+    let uuid = Uuid::now_v1(
         &get_node_id(),
     );
-    Ok(UUID {uuid })
+    Ok(UUID { uuid })
 }
 
 #[pyfunction]
 fn uuid2() -> PyResult<UUID> {
     let uuid = _uuid2::now_v2();
-    Ok(UUID {uuid })
+    Ok(UUID { uuid })
 }
 
 #[pyfunction]
@@ -45,13 +44,13 @@ fn uuid3() -> PyResult<UUID> {
         &Uuid::new_v4(),
         &get_node_id(),
     );
-    Ok(UUID {uuid })
+    Ok(UUID { uuid })
 }
 
 #[pyfunction]
 fn uuid4() -> PyResult<UUID> {
     let uuid = Uuid::new_v4();
-    Ok(UUID {uuid })
+    Ok(UUID { uuid })
 }
 
 #[pyfunction]
@@ -60,7 +59,7 @@ fn uuid5() -> PyResult<UUID> {
         &Uuid::new_v4(),
         &get_node_id(),
     );
-    Ok(UUID {uuid })
+    Ok(UUID { uuid })
 }
 
 #[pyfunction]
@@ -68,20 +67,21 @@ fn uuid6() -> PyResult<UUID> {
     let uuid = Uuid::now_v6(
         &get_node_id()
     );
-    Ok(UUID {uuid })
+    Ok(UUID { uuid })
 }
 
 #[pyfunction]
 fn uuid7() -> PyResult<UUID> {
     let uuid = Uuid::now_v7();
-    Ok(UUID {uuid })
+    Ok(UUID { uuid })
 }
+
 #[pyfunction]
 fn uuid8(bytes: &Bound<'_, PyBytes>) -> PyResult<UUID> {
     let uuid = Uuid::new_v8(
         bytes.extract()?
     );
-    Ok(UUID {uuid })
+    Ok(UUID { uuid })
 }
 
 

@@ -1,24 +1,22 @@
-use pyo3::{Bound, pyclass, pymethods, PyResult};
-use pyo3::prelude::PyAnyMethods;
-use pyo3::types::PyBytes;
-use uuid::Uuid;
-use uuid::Bytes;
+use pyo3::{
+    exceptions::PyNotImplementedError, prelude::PyAnyMethods, pyclass, pymethods, types::PyBytes, Bound, PyResult,
+};
+use uuid::{Bytes, Uuid};
 
 
-#[pyclass(subclass, module="uuid_lib")]
+#[pyclass(subclass, module = "uuid_lib")]
 #[derive(Clone)]
 pub struct UUID {
-    pub uuid: Uuid
+    pub uuid: Uuid,
 }
 
 
 #[pymethods]
 impl UUID {
     #[new]
-    fn new(
+    fn init(
         bytes: &Bound<'_, PyBytes>,
     ) -> PyResult<Self> {
-
         let uuid = match bytes {
             bytes => Self::new_from_bytes(bytes),
         }?;
@@ -27,16 +25,26 @@ impl UUID {
 
 
     fn __str__(&self) -> String {
-        return self.uuid.hyphenated().to_string();
+        self.uuid.hyphenated().to_string()
     }
 
     fn __repr__(&self) -> String {
-        return format!("UUID object:  UUID(\"{}\")", self.uuid)
+        format!("UUID object:  UUID(\"{}\")", self.uuid)
     }
 
     #[getter]
     fn bytes(&self) -> &[u8] {
         self.uuid.as_bytes()
+    }
+
+    fn to_timestamp(&self) -> PyResult<u64> {
+        match self.uuid.get_timestamp() {
+            Some(ts) => {
+                let (seconds, subsec_nanos) = ts.to_unix();
+                Ok(seconds * 1000 + subsec_nanos as u64 / 1_000_000)
+            }
+            _ => Err(PyNotImplementedError::new_err("Timestamp not available for this uuid version!"))
+        }
     }
 
     #[staticmethod]

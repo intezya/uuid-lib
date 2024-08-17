@@ -1,12 +1,12 @@
 extern crate chrono;
+extern crate libc;
 extern crate rand;
 extern crate uuid;
-extern crate libc;
 
 use chrono::Utc;
-use uuid::{Uuid};
 use libc::getpid;
 use rand::Rng;
+use uuid::Uuid;
 
 
 fn generate_uuid_v2() -> Uuid {
@@ -46,5 +46,5 @@ fn generate_uuid_v2() -> Uuid {
 
 pub fn now_v2() -> Uuid {
     let uuid2 = generate_uuid_v2();
-    return uuid2
+    uuid2
 }

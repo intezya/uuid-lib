@@ -1,3 +1,8 @@
+from typing import TypeAlias
+
+Bytes: TypeAlias = bytes
+
+
 class UUID:
     """
     A class representing a universally unique identifier (UUID).
@@ -6,6 +11,26 @@ class UUID:
     various methods for converting to string representation and accessing
     the UUID in bytes form.
     """
+
+    def __init__(self, bytes: Bytes) -> UUID:
+        """
+        Initialize a UUID object from a 16-byte string.
+
+        This method creates a UUID object using a 16-byte sequence, which represents the binary form of a UUID.
+        The input `bytes` must be exactly 16 bytes long.
+
+        Args:
+            bytes (bytes): A 16-byte string representing the UUID. The input must be exactly 16 bytes in length.
+
+        Raises:
+            ValueError: If the provided bytes are not exactly 16 bytes long.
+
+        Examples:
+            - UUID(bytes=b'\x12\x34\x56\x78\x9a\xbc\xde\xf0\x12\x34\x56\x78\x9a\xbc\xde\xf0'): Creates a UUID object using the provided 16 bytes.
+            - UUID(uuid4().bytes)
+
+        """
+        ...
 
     def __str__(self) -> str:
         """
@@ -44,6 +69,18 @@ class UUID:
         """
         ...
 
+    def to_timestamp(self) -> int:
+        """
+        Converts the object to a Unix timestamp.
+
+        Works only with uuid1, uuid6, uuid7.
+        Raises NotImplemented when used for unsupported uuids.
+
+        Returns:
+            int: The number of seconds that have elapsed since January 1, 1970, at 00:00:00 UTC.
+        """
+        ...
+
 
 def uuid1() -> UUID:
     """
@@ -57,6 +94,7 @@ def uuid1() -> UUID:
     """
     ...
 
+
 def uuid2() -> UUID:
     """
     Generate a UUID based on a DCE Security version and the current time.
@@ -68,6 +106,7 @@ def uuid2() -> UUID:
         UUID: A UUID object representing a Version 2 UUID.
     """
     ...
+
 
 def uuid3() -> UUID:
     """
@@ -81,6 +120,7 @@ def uuid3() -> UUID:
     """
     ...
 
+
 def uuid4() -> UUID:
     """
     Generate a random UUID.
@@ -91,6 +131,7 @@ def uuid4() -> UUID:
         UUID: A UUID object representing a Version 4 UUID.
     """
     ...
+
 
 def uuid5() -> UUID:
     """
@@ -104,6 +145,7 @@ def uuid5() -> UUID:
     """
     ...
 
+
 def uuid6() -> UUID:
     """
     Generate a UUID based on the time and clock sequence, reordered for improved database indexing.
@@ -115,6 +157,7 @@ def uuid6() -> UUID:
         UUID: A UUID object representing a Version 6 UUID.
     """
     ...
+
 
 def uuid7() -> UUID:
     """
@@ -128,7 +171,8 @@ def uuid7() -> UUID:
     """
     ...
 
-def uuid8(bytes: bytes) -> UUID:
+
+def uuid8(bytes: Bytes) -> UUID:
     """
     Generate a UUID from a custom 16-byte string.
 
