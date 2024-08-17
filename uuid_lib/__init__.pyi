@@ -74,7 +74,7 @@ class UUID:
         Converts the object to a Unix timestamp.
 
         Works only with uuid1, uuid6, uuid7.
-        Raises ValueError when used for unsupported uuids.
+        Raises NotImplemented when used for unsupported uuids.
 
         Returns:
             int: The number of seconds that have elapsed since January 1, 1970, at 00:00:00 UTC.

@@ -1,5 +1,5 @@
 use pyo3::{
-    exceptions::PyValueError, prelude::PyAnyMethods, pyclass, pymethods, types::PyBytes, Bound, PyResult,
+    exceptions::PyNotImplementedError, prelude::PyAnyMethods, pyclass, pymethods, types::PyBytes, Bound, PyResult,
 };
 use uuid::{Bytes, Uuid};
 
@@ -43,7 +43,7 @@ impl UUID {
                 let (seconds, subsec_nanos) = ts.to_unix();
                 Ok(seconds * 1000 + subsec_nanos as u64 / 1_000_000)
             }
-            _ => Err(PyValueError::new_err("Timestamp not available for this uuid version!"))
+            _ => Err(PyNotImplementedError::new_err("Timestamp not available for this uuid version!"))
         }
     }
 
