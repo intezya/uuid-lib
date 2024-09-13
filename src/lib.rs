@@ -4,7 +4,7 @@ use pyo3::prelude::{
 };
 use pyo3::types::PyBytes;
 use rand::RngCore;
-use uuid::{Context, Timestamp, Uuid};
+use uuid::{Uuid};
 use uuid_struct::UUID;
 
 mod _uuid2;
