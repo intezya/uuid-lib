@@ -32,6 +32,10 @@ impl UUID {
         format!("UUID object:  UUID(\"{}\")", self.uuid)
     }
 
+    fn __len__(&self) -> usize {
+        self.uuid.hyphenated().to_string().chars().count()
+    }
+
     #[getter]
     fn bytes(&self) -> &[u8] {
         self.uuid.as_bytes()
