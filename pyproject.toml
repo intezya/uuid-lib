@@ -17,5 +17,5 @@ dynamic = ["version"]
 
 [tool.maturin]
 features = ["pyo3/extension-module"]
-python-source = "uuid_lib"
+python-source = "python"
 module-name = "uuid_lib._uuid_lib"
