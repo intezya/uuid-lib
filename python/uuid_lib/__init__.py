@@ -1,4 +1,4 @@
-from python.uuid_lib import (
+from ._uuid_lib import (
     uuid1,
     uuid2,
     uuid3,
